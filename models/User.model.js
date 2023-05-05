@@ -15,7 +15,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       minlength: 8,
-      validate: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+      validate: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
     },
     profileImg: {
       type: String,
@@ -27,9 +27,9 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ['USER', 'DEV'],
-      default: 'USER'
-    }
+      enum: ["STUDENT", "DEV", "TA", "PM", "LEAD"],
+      default: "STUDENT",
+    },
   },
   {
     timestamps: true,

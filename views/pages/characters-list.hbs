@@ -7,12 +7,12 @@
     {{#each characters.data}}
       <div class="col-md-4">
         <article class="character">
-          <h2>{{name}} <small>(ID {{mal_id}})</small></h2>
+          <h2>{{name}} <small>(#{{mal_id}})</small></h2>
           <hr />
+          <img src="{{images.jpg.image_url}}">
           <p>Name: {{name}}</p>
           <p>Favorites: {{favorites}}</p>
-          <p>About: {{about}}</p>
-          <img src="{{images.jpg.image_url}}">
+          <p >About: {{about}}</p>
           <div class="btn-group" style="width: 100%">
             <a
               href="/movies-characters/edit/{{id}}"

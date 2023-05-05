@@ -5,15 +5,16 @@
   <div class="row">
 
     {{#each animes.data}}
-      <div class="col-md-4">
+      <div class="col-md-2">
         <article class="character">
-          <h2>{{name}} <small>(ID {{mal_id}})</small></h2>
+          <h2>{{name}} <small>#{{mal_id}}</small></h2>
           <hr />
-          <p>Title: {{title}}</p>
+           <img src="{{images.jpg.large_image_url}}" alt=""> 
+          <p><strong>Title:</strong>  {{title}}</p>
           <p>Episodes: {{episodes}}</p>
           <p>Rank: {{rank}}</p>
           <p>Status: {{status}}</p>
-           <img src="{{images.jpg.large_image_url}}" alt=""> 
+          <p>Favorite: {{favorites}}❤️</p>
            {{!-- <iframe src="{{trailer.embed_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="video" style="width: 50%; height: 450px;"></iframe>  --}}
            {{!-- <div class="btn-group" style="width: 100%"> --}}
 
