@@ -7,7 +7,7 @@ class ApiService {
   }
 
   getFullAnimebyID() {
-    const page = 1;
+    const page = 4;
     return this.api.get(`/anime?page=${page}`);
   }
   goNextPage() {

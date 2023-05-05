@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.get("/search/anime",(req, res)=>{
+router.get("/",(req, res)=>{
   apiAnime.getSearch().then((res)=>{
 
     res.render("/")
