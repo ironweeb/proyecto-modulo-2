@@ -12,4 +12,14 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/search/anime",(req, res)=>{
+  apiAnime.getSearch().then((res)=>{
+
+    res.render("/")
+  })
+
+})
+
+
+
 module.exports = router;
