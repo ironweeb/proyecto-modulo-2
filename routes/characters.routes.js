@@ -5,8 +5,8 @@ const apiService = new ApiService();
 
 router.get("/", (req, res) => {
   apiService.getAllCharacters().then((response) => {
-    const characters = response.data;
     console.log(res.data);
+    const characters = response.data;
     res.render("pages/characters-list", { characters });
   });
 });

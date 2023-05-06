@@ -1,44 +1,40 @@
 const { Schema, model } = require("mongoose");
 
 const animeSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  status: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: String,
-    required: true,
-  },
-  synopsis: {
-    type: String,
-    required: true,
-  },
-  year: {
-    type: String,
-    required: true,
-  },
-  image_url: {
-    type: String,
-    required: true,
-  },
-  episodes: {
-    type: Number,
-    required: true,
-  },
-  rank: {
-    type: Number,
-    required: true,
-  },
-  favorites: {
-    type: Number,
-    required: true,
-  },
-
-  timestamps: true,
+  mal_id: { type: Number, required: true },
+  url: { type: String, required: true },
+  // images: {
+  //   jpg: {
+  // image_url: { type: String, required: true },
+  // small_image_url: { type: String, required: true },
+  // large_image_url: { type: String, required: true },
+  // },
+  // webp: {
+  //   image_url: { type: String, required: true },
+  //   small_image_url: { type: String, required: true },
+  //   large_image_url: { type: String, required: true },
+  // },
+  // },
+  // // trailer: {
+  // //   youtube_id: { type: String, required: true },
+  // //   url: { type: String, required: true },
+  // //   embed_url: { type: String, required: true },
+  // // },
+  // approved: { type: Boolean, required: true },
+  // titles: [
+  //   {
+  //     type: { type: String, required: true },
+  //     title: { type: String, required: true },
+  //   },
+  // ],
+  title: { type: String, required: true },
+  // // // title_english: { type: String, required: true },
+  // // // title_japanese: { type: String, required: true },
+  // // // title_synonyms: [{ type: String, required: true }],
+  // // type: { type: String, required: true },
+  // // source: { type: String, required: true },
+  // episodes: { type: Number, required: true },
+  // status: { type: String, required: true },
 });
 
-module.exports = model("User", animeSchema);
+module.exports = model("Anime", animeSchema);
