@@ -1,8 +1,9 @@
 const { Schema, model } = require("mongoose");
 
 const animeSchema = new Schema({
-  mal_id: { type: Number, required: true },
-  url: { type: String, required: true },
+  mal_id: Number,
+  url: String,
+  title: String,
   // images: {
   //   jpg: {
   // image_url: { type: String, required: true },
@@ -27,7 +28,6 @@ const animeSchema = new Schema({
   //     title: { type: String, required: true },
   //   },
   // ],
-  title: { type: String, required: true },
   // // // title_english: { type: String, required: true },
   // // // title_japanese: { type: String, required: true },
   // // // title_synonyms: [{ type: String, required: true }],
