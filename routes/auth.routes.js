@@ -4,8 +4,8 @@ const User = require("../models/User.model");
 const saltRounds = 10;
 
 // Register
-router.get("/register", (req, res, next) => res.render("auth/register"));
-router.post("/register", (req, res, next) => {
+router.get("/registro", (req, res, next) => res.render("auth/signup"));
+router.post("/registro", (req, res, next) => {
   const { userPwd } = req.body;
 
   bcrypt
@@ -14,11 +14,8 @@ router.post("/register", (req, res, next) => {
     .then((hashedPassword) =>
       User.create({ ...req.body, password: hashedPassword })
     )
-    .then(() => res.redirect("/"))
-    .catch((error) => {
-      res.status(404).render("not-found");
-      console.error(error);
-    });
+    .then((createdUser) => res.redirect("/"))
+    .catch((error) => next(error));
 });
 
 // Login
@@ -29,20 +26,26 @@ router.post("/login", (req, res, next) => {
   User.findOne({ email })
     .then((user) => {
       if (!user) {
-        res.render("auth/login", { errorMessage: "User is not registered." });
+        res.render("auth/login", {
+          errorMessage: "Email no registrado en la Base de Datos",
+        });
         return;
       } else if (bcrypt.compareSync(userPwd, user.password) === false) {
-        res.render("auth/login", { errorMessage: "Incorrect password" });
+        res.render("auth/login", {
+          errorMessage: "La contraseña es incorrecta",
+        });
         return;
       } else {
         req.session.currentUser = user;
-        res.redirect("/");
+        res.redirect("/userprofile");
       }
     })
-    .catch((error) => {
-      res.status(404).render("not-found");
-      console.error(error);
-    });
+    .catch((error) => next(error));
+});
+
+//User profile
+router.get("/userProfile", (req, res) => {
+  res.render("auth/user-profile", { userInSession: req.session.currentUser });
 });
 
 // Logout

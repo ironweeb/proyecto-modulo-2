@@ -4,7 +4,7 @@
 
   <div class="row">
 
-    {{#each animes.data}}
+    {{#each animes}}
       <div class="col-md-2">
         <article class="character">
           <h2>{{name}} <small>#{{mal_id}}</small></h2>
@@ -19,6 +19,14 @@
           {{! <div class="btn-group" style="width: 100%"> }}
 
         </article>
+       {{#if ../canEdit}}
+  <a href="/animes/{{mal_id}}/edit">Edit</a>
+{{/if}}
+{{#if ../canDelete}}
+  <form action="/animes/{{mal_id}}/delete" method="post">
+    <button type="summit">🗑️</button>
+  </form>
+{{/if}} 
       </div>
     {{/each}}
 
