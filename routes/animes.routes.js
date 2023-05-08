@@ -12,12 +12,16 @@ router.get("/insertar", (req, res) => {
     data.data.forEach((element) => {
       Anime.create(element);
     });
+    return;
   });
 });
 
 router.get("/list", (req, res) => {
   Anime.find()
-    .then((animes) => res.render("pages/animes-list", { animes }))
+    .then((animes) => {
+      console.log(animes);
+      res.render("pages/animes-list", { animes });
+    })
     .catch((err) => console.log(err));
 });
 
