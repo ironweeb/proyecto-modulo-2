@@ -35,14 +35,16 @@
           <li class="nav-item">
             <a class="nav-link" href="/login">Log in</a>
           </li>
+          <li>Este es tu perfil: {{userInSession.username}}</li>
           <li class="nav-item">
              <li class="nav-item">
           </li>
             <form action="/logout" method="POST">
               <button class="nav-link">Logout</button>
             </form>
-          
-              <form action="/" id="formulario-busqueda" method="get">
+
+              <form action="/animes" id="formulario-busqueda" method="get">
+
       <label for="consulta-busqueda"></label>
       <input type="text" id="consulta-busqueda" name="q">
       <button type="submit">Buscar</button>

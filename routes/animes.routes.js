@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { isLoggedIn, checkRole } = require("../middleware/route.guard");
 const Anime = require("../models/Anime.model");
+const User = require("../models/User.model");
 
 const ApiAnime = require("../services/anime.service");
 const apiAnime = new ApiAnime();
@@ -19,7 +20,6 @@ router.get("/insertar", (req, res) => {
 router.get("/list", (req, res) => {
   Anime.find()
     .then((animes) => {
-      console.log(animes);
       res.render("pages/animes-list", { animes });
     })
     .catch((err) => console.log(err));
@@ -28,7 +28,7 @@ router.get("/list", (req, res) => {
 router.get("/:animeId", isLoggedIn, async (req, res, next) => {
   const { animeId } = req.params;
   const profile = await User.findById(animeId);
-  res.render("pages/animes-list", {
+  res.render("pages/anime-details", {
     profile,
     canEdit:
       (req.session.currentUser &&
