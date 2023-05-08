@@ -3,6 +3,9 @@
   <hr />
 
   <div class="row">
+{{#if currentUser}}ç
+<h1>Logged</h1>
+{{/if}}
 
     {{#each animes}}
       <div class="col-md-2">
@@ -15,7 +18,6 @@
           <p>Status: {{status}}</p>
           {{!-- <iframe src="{{trailer.embed_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="video" style="width: 50%; height: 450px;"></iframe>  --}}
           {{! <div class="btn-group" style="width: 100%"> }}
-
         </article>
   <a href="/animes/{{mal_id}}">Ver perfil</a>
        {{#if ../canEdit}}
