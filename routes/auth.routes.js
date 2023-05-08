@@ -4,7 +4,7 @@ const User = require("../models/User.model");
 const saltRounds = 10;
 
 // Register
-router.get("/registro", (req, res, next) => res.render("auth/signup"));
+router.get("/registro", (req, res, next) => res.render("auth/register"));
 router.post("/registro", (req, res, next) => {
   const { userPwd } = req.body;
 
