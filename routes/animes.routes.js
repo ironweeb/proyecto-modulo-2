@@ -16,6 +16,11 @@ router.get("/insertar", (req, res) => {
     return;
   });
 });
+router.get("/results", (req, res) => {
+  apiAnime.searchAnime().then(({ data }) => {
+    res.render("pages/results", data);
+  });
+});
 
 router.get("/list", (req, res) => {
   Anime.find()
@@ -25,18 +30,20 @@ router.get("/list", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.get("/:animeId", isLoggedIn, async (req, res, next) => {
-  const { animeId } = req.params;
-  const profile = await User.findById(animeId);
-  res.render("pages/anime-details", {
-    profile,
-    canEdit:
-      (req.session.currentUser &&
-        ["PM"].includes(req.session.currentUser.role)) ||
-      req.session.currentUser._id === id,
-    canDelete:
-      req.session.currentUser && ["PM"].includes(req.session.currentUser.role),
-  });
+router.get("/:id", isLoggedIn, async (req, res, next) => {
+  const { id } = req.params;
+  const anime = await Anime.findById(id);
+  console.log(anime),
+    res.render("pages/anime-details", {
+      anime,
+      canEdit:
+        (req.session.currentUser &&
+          ["ADMIN", "DEV"].includes(req.session.currentUser.role)) ||
+        req.session.currentUser._id === anime,
+      canDelete:
+        req.session.currentUser &&
+        ["ADMIN"].includes(req.session.currentUser.role),
+    });
 });
 router.get(
   "/:animeId/edit",

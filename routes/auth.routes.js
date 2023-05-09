@@ -37,6 +37,7 @@ router.post("/login", (req, res, next) => {
         return;
       } else {
         req.session.currentUser = user;
+        req.app.locals.currentUser = user;
         res.redirect("/userprofile");
       }
     })
