@@ -24,6 +24,12 @@
             <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/anime/list">Animes</a>
+          </li>
+          <li>
+            <a class="nav-link" href="/characters">Characters</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="/registro">Register</a>
           </li>
           <li class="nav-item">
@@ -35,13 +41,9 @@
             <form action="/logout" method="POST">
               <button class="nav-link">Logout</button>
             </form>
-           <li class="nav-item">
-            <a class="nav-link" href="/animes/list">Animes</a>
-          </li>
-          <li>
-            <a class="nav-link" href="/characters">Characters</a>
-          </li>
-              <form action="/results" id="formulario-busqueda" method="get">
+
+              <form action="/animes" id="formulario-busqueda" method="get">
+
       <label for="consulta-busqueda"></label>
       <input type="text" id="consulta-busqueda" name="q">
       <button type="submit">Buscar</button>
