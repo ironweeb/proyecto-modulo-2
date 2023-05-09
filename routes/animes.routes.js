@@ -16,12 +16,14 @@ router.get("/insertar", (req, res) => {
     return;
   });
 });
+
 router.get("/results", (req, res) => {
   apiAnime.searchAnime().then(({ data }) => {
     res.render("pages/results", data);
   });
 });
 
+//GET ANIME LIST
 router.get("/list", (req, res) => {
   Anime.find()
     .then((animes) => {
@@ -30,10 +32,11 @@ router.get("/list", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+//GET ANIME DETAILS
 router.get("/:id", isLoggedIn, async (req, res, next) => {
-  const { id } = req.params;
-  const anime = await Anime.findById(id);
-  console.log(anime),
+  try {
+    const { id } = req.params;
+    const anime = await Anime.findById(id);
     res.render("pages/anime-details", {
       anime,
       canEdit:
@@ -44,20 +47,30 @@ router.get("/:id", isLoggedIn, async (req, res, next) => {
         req.session.currentUser &&
         ["ADMIN"].includes(req.session.currentUser.role),
     });
+  } catch (err) {
+    console.log(err);
+  }
 });
-router.get(
-  "/:animeId/edit",
-  [isLoggedIn, checkRole(["DEV", "ADMIN"])],
-  (req, res) => {
-    const { animeId } = req.params;
 
-    Anime.findById(animeId)
-      .then((anime) => res.render("celebrities/edit-celebrity", anime))
-      .catch((err) => console.log(err));
+//GET ANIME EDIT
+router.get(
+  "/:id/edit",
+  [isLoggedIn, checkRole(["ADMIN"])],
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const anime = await Anime.findById(id, req.body);
+      res.render("pages/anime-edit", {
+        anime,
+        canEdit: ["ADMIN"].includes(req.session.currentUser.role),
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 );
 
-//POST ANIMES
+////POST ANIMES
 router.post(
   "/:animeId/edit",
   [isLoggedIn, checkRole(["DEV", "ADMIN"])],
@@ -81,16 +94,12 @@ router.post(
 );
 
 router.post(
-  "/:animeId/delete",
+  "/:id/delete",
   [isLoggedIn, checkRole(["ADMIN"])],
-  async (req, res) => {
-    try {
-      const { animeId } = req.params;
-      await Anime.findByIdAndDelete(animeId);
-      res.redirect("/list");
-    } catch (error) {
-      console.log(error);
-    }
+  async (req, res, next) => {
+    const { id } = req.params;
+    await Anime.findByIdAndDelete(id);
+    res.redirect("/animes/list");
   }
 );
 
