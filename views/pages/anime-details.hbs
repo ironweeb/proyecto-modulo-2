@@ -8,16 +8,16 @@
   <h3>Episodios:{{episodes}}</h3>
   <h3>Género:{{genres.name}}</h3>
   <h3>Score: {{score}}</h3>
-{{/with}}
 
 {{#if ../canEdit}}
-    <a href=`/animes/{{_id}}/edit/` class="btn btn-outline-dark btn-sm"
-     >Editar anime✏️</a>
-
+    <a href="/animes/{{_id}}/edit" class="btn btn-outline-dark btn-sm">Editar anime ✏️</a>
 {{/if}}
+
 {{#if ../canDelete}}
-<form action=`/animes/{{_id}}/delete` method="post">
+<form action="/animes/{{_id}}/delete" method="post">
 <button type="summit">🗑️</button>
 </form>
 {{/if}}
+
+{{/with}}
         
