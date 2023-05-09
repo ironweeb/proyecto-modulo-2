@@ -2,32 +2,25 @@ const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
-    username: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      unique: true,
-      required: true,
-    },
+    username: { type: String, required: true },
+    email: { type: String, unique: true, required: true },
     password: {
       type: String,
       required: true,
-      minlength: 8,
-      validate: /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+      match: [
+        /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/,
+        "Password needs to have at least 8 chars and must contain at least one number, one lowercase and one uppercase letter.",
+      ],
     },
     profileImg: {
       type: String,
       default: "https://i.stack.imgur.com/l60Hf.png",
     },
-    description: {
-      type: String,
-      default: "No existe descripción.",
-    },
+    description: { type: String, default: "No existe descripción." },
+    // add roles setup here
     role: {
       type: String,
-      enum: ["USER", "DEV", "ADMIN"],
+      enum: ["USER", "VIP", "ADMIN"],
       default: "USER",
     },
   },

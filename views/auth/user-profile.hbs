@@ -1,9 +1,13 @@
 {{#if userInSession}}
-  <h2>Bienvenido nakama {{userInSession.username}}!!</h2>
-  <img src="https://thumbs.gfycat.com/NextDampBittern-max-1mb.gif" alt="" />
+  <h2>Bienvenido Nakama {{userInSession.username}}!!</h2>
+  <img
+    class="img-wellcome"
+    src="https://thumbs.gfycat.com/NextDampBittern-max-1mb.gif"
+    alt=""
+  />
 
   <button>
-    <a href="/userprofile">Recargar página</a>
+    <a href="/users">List of Users</a>
   </button>
 {{else}}
 
