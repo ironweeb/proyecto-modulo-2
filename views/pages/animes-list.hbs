@@ -19,12 +19,12 @@
           {{!-- <iframe src="{{trailer.embed_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="video" style="width: 50%; height: 450px;"></iframe>  --}}
           {{! <div class="btn-group" style="width: 100%"> }}
         </article>
-  <a href="/animes/{{mal_id}}">Ver perfil</a>
+  <a href="/animes/{{_id}}">Ver perfil</a>
        {{#if ../canEdit}}
-  <a href="/animes/{{mal_id}}/edit">Edit</a>
+  <a href="/animes/{{_id}}/edit">Edit</a>
 {{/if}}
 {{#if ../canDelete}}
-  <form action="/animes/{{mal_id}}/delete" method="post">
+  <form action="/animes/{{_id}}/delete" method="post">
     <button type="summit">🗑️</button>
   </form>
 {{/if}} 

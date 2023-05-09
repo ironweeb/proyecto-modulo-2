@@ -10,13 +10,20 @@ class ApiService {
     const page = 1;
     return this.api.get(`/anime?page=${page}`);
   }
-  searchAnime = async (keyword) => {
-    const response = await axios.get(
-      `https://api.jikan.moe/v4/search/anime?q=${keyword}&sfw`
-    );
-    const results = response.data.results;
-    return results;
-  };
+
+  getSearchAnime() {
+    const animeName = "";
+    console.log(animeName);
+    return this.api.get(`/anime?q=${animeName}`);
+  }
+  // searchAnime = async () => {
+  //   const keyword = document.getElementById("consulta-busqueda").value;
+  //   const response = await axios.get(
+  //     `https://api.jikan.moe/v4/search/anime?q=${keyword}`
+  //   );
+  //   const results = response.data.results;
+  //   return results;
+  // };
   // goNextPage() {
   //   const totalPage = 40;
   //   const page = 1;

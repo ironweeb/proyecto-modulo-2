@@ -1,1 +1,23 @@
-<h1>Anime Details</h1>
+{{#with anime}}
+  <h1>{{title}}</h1>
+<div class="d-flex">
+  <img src="{{images.jpg.large_image_url}}" alt=`trailer of {{title}}`>
+  {{!-- <iframe src="{{trailer.embed_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="video" style="width: 50%; height: 450px;"></iframe>  --}}
+  <h3>{{synopsis}}</h3>
+  </div>
+  <h3>Episodios:{{episodes}}</h3>
+  <h3>Género:{{genres.name}}</h3>
+  <h3>Score: {{score}}</h3>
+{{/with}}
+
+{{#if ../canEdit}}
+    <a href=`/animes/{{_id}}/edit/` class="btn btn-outline-dark btn-sm"
+     >Editar anime✏️</a>
+
+{{/if}}
+{{#if ../canDelete}}
+<form action=`/animes/{{_id}}/delete` method="post">
+<button type="summit">🗑️</button>
+</form>
+{{/if}}
+        
