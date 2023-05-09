@@ -3,31 +3,22 @@
   <hr />
 
   <div class="row">
-{{#if currentUser}}ç
-<h1>Logged</h1>
-{{/if}}
 
     {{#each animes}}
       <div class="col-md-2">
         <article class="character">
           <h2>{{name}} <small>#{{mal_id}}</small></h2>
           <hr />
-          <img src="{{images.jpg.large_image_url}}" alt="" />
+          <a href="/animes/{{_id}}"><img
+              src="{{images.jpg.image_url}}"
+              alt=""
+            /></a>
           <p><strong>Title:</strong> {{title}}</p>
           <p>Episodes: {{episodes}}</p>
           <p>Status: {{status}}</p>
           {{!-- <iframe src="{{trailer.embed_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="video" style="width: 50%; height: 450px;"></iframe>  --}}
           {{! <div class="btn-group" style="width: 100%"> }}
         </article>
-  <a href="/animes/{{_id}}">Ver perfil</a>
-       {{#if ../canEdit}}
-  <a href="/animes/{{_id}}/edit">Edit</a>
-{{/if}}
-{{#if ../canDelete}}
-  <form action="/animes/{{_id}}/delete" method="post">
-    <button type="summit">🗑️</button>
-  </form>
-{{/if}} 
       </div>
     {{/each}}
 

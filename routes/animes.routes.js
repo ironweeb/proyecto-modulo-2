@@ -72,24 +72,12 @@ router.get(
 
 ////POST ANIMES
 router.post(
-  "/:animeId/edit",
-  [isLoggedIn, checkRole(["DEV", "ADMIN"])],
-  async (req, res) => {
-    try {
-      const { animeId } = req.params;
-      const { title, url, image, rank, episodes, status, favorite } = req.body;
-      await Anime.findByIdAndUpdate(animeId, {
-        title,
-        url,
-        image,
-        rank,
-        episodes,
-        status,
-        favorite,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  "/:id/edit",
+  [isLoggedIn, checkRole(["ADMIN"])],
+  async (req, res, next) => {
+    const { id } = req.params;
+    await Anime.findByIdAndUpdate(id, req.body);
+    res.redirect(`/animes/${id}`);
   }
 );
 
