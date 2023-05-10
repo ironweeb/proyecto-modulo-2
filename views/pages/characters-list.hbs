@@ -1,38 +1,38 @@
 <section class="container">
-  <h1>Characters list</h1>
+  <h1>character</h1>
   <hr />
 
   <div class="row">
 
-    {{#each characters.data}}
-      <div class="col-md-4">
+    {{#each characters}}
+      <div class="col-md-2">
         <article class="character">
-          <h2>{{name}} <small>(#{{mal_id}})</small></h2>
           <hr />
-          <img src="{{images.jpg.image_url}}">
-          <p>Name: {{name}}</p>
-          <p>Favorites: {{favorites}}</p>
-          <div style="height: 220px;px;width: 420px;px;border:1px solid #ccc;font:16px/26px Helvetica, Serif;overflow:auto;">
-          <p >About: {{about}}</p>
-          </div>
-          <div class="btn-group" style="width: 100%">
-            <a
-              href="/movies-characters/edit/{{id}}"
-              class="btn btn-outline-dark btn-sm"
-            >Edit character</a>
-            <a
-              href="/movies-characters/delete/{{id}}"
-              class="btn btn-dark btn-sm"
-            >Delete character</a>
-          </div>
+          <a href="/characters/{{_id}}"><img
+              src="{{images.jpg.image_url}}"
+              alt=""
+            /></a>
+          <h2>{{name}} <small>#{{mal_id}}</small></h2>
+          <p>Name Kanji: {{name_kanji}}</p>
+          <p>Favorites:: {{favorites}}❤️</p>
         </article>
+        <div class="d-flex">
+        {{#if ../canEdit}}
+    <a href="/characters/{{_id}}/edit" class="btn btn-outline-dark btn-sm">Editar anime ✏️</a>
+{{/if}}
+
+{{#if ../canDelete}}
+<form action="/characters/{{_id}}/delete" method="post">
+<button type="summit">🗑️</button>
+</form>
+{{/if}}
+</div>
       </div>
     {{/each}}
 
-    
-{{#each  characters.pagination}}
-    <p> PAGE:{{current_page}} </p>
-    {{/each}}
+    <br />
+    <br />
+    <button id="cargar-mas">Página siguiente</button>
 
   </div>
 

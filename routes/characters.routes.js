@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { isLoggedIn, checkRole } = require("../middleware/route.guard");
-const Character = require("../models/Characters.model");
+const Character = require("../models/Character.model");
 const User = require("../models/User.model");
 
 const ApiService = require("../services/api.service");
@@ -9,36 +9,39 @@ const apiService = new ApiService();
 
 // GET CHARACTER LIST
 router.get("/list", (req, res) => {
-  apiService
-    .getAllCharacters()
-    .then(({ data }) => {
-      res.render("pages/characters-list", { characters: data.data });
+  Character.find()
+    .then((characters) => {
+      res.render("pages/characters-list", {
+        characters,
+        canEdit:
+          (req.session.currentUser &&
+            ["ADMIN", "DEV"].includes(req.session.currentUser.role)) ||
+          req.session.currentUser._id === characters,
+        canDelete:
+          req.session.currentUser &&
+          ["ADMIN"].includes(req.session.currentUser.role),
+      });
     })
-    .catch((err) => {
-      console.log(err);
-      res.redirect("/");
-    });
+    .catch((err) => console.log(err));
 });
 
 // GET CHARACTER DETAILS
-router.get("/:id", async (req, res) => {
+router.get("/:id", isLoggedIn, async (req, res, next) => {
   try {
     const { id } = req.params;
-    const response = await apiService.api.get(`/characters/${id}`);
-    const character = response.data.data;
+    const character = await Character.findById(id);
     res.render("pages/character-details", {
-      anime,
+      character,
       canEdit:
         (req.session.currentUser &&
           ["ADMIN", "DEV"].includes(req.session.currentUser.role)) ||
-        req.session.currentUser._id === anime,
+        req.session.currentUser._id === character,
       canDelete:
         req.session.currentUser &&
         ["ADMIN"].includes(req.session.currentUser.role),
     });
   } catch (err) {
     console.log(err);
-    res.redirect("/characters/list");
   }
 });
 
@@ -46,17 +49,16 @@ router.get("/:id", async (req, res) => {
 router.get(
   "/:id/edit",
   [isLoggedIn, checkRole(["ADMIN"])],
-  async (req, res) => {
+  async (req, res, next) => {
     try {
       const { id } = req.params;
       const character = await Character.findById(id, req.body);
       res.render("pages/character-edit", {
-        anime,
+        character,
         canEdit: ["ADMIN"].includes(req.session.currentUser.role),
       });
     } catch (err) {
       console.log(err);
-      res.redirect("/characters/list");
     }
   }
 );
@@ -65,10 +67,19 @@ router.get(
 router.post(
   "/:id/edit",
   [isLoggedIn, checkRole(["ADMIN"])],
-  async (req, res) => {
+  async (req, res, next) => {
     const { id } = req.params;
-    await Character.findByIdAndUpdate(id, req.body);
-    res.redirect("/characters/list");
+    const data = {
+      ...req.body,
+      images: {
+        jpg: {
+          image_url: req.body.images,
+        },
+      },
+      nicknames: [{ 0: req.body.nicknames }],
+    };
+    await Character.findByIdAndUpdate(id, data);
+    res.redirect(`/characters/${id}`);
   }
 );
 

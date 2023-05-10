@@ -83,8 +83,8 @@ router.post(
           image_url: req.body.images,
         },
       },
+      genres: [{ name: req.body.genres }],
     };
-    console.log(data, req.body);
     await Anime.findByIdAndUpdate(id, data);
     res.redirect(`/animes/${id}`);
   }

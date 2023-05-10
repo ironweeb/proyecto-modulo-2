@@ -6,7 +6,7 @@ class ApiService {
     });
   }
   getAllCharacters() {
-    const page = 1;
+    const page = 3;
     return this.api.get(`/characters?page=${page}`);
   }
 }
