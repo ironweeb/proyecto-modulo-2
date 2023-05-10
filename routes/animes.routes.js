@@ -76,7 +76,16 @@ router.post(
   [isLoggedIn, checkRole(["ADMIN"])],
   async (req, res, next) => {
     const { id } = req.params;
-    await Anime.findByIdAndUpdate(id, req.body);
+    const data = {
+      ...req.body,
+      images: {
+        jpg: {
+          image_url: req.body.images,
+        },
+      },
+    };
+    console.log(data, req.body);
+    await Anime.findByIdAndUpdate(id, data);
     res.redirect(`/animes/${id}`);
   }
 );
