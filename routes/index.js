@@ -8,7 +8,6 @@ module.exports = (app) => {
   app.use("/", authRouter);
   const usersRouter = require("./users.routes");
   app.use("/users", usersRouter);
-
   const animessRouter = require("./animes.routes");
   app.use("/animes", animessRouter);
 };
