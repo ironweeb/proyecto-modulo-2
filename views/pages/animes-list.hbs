@@ -1,9 +1,11 @@
 <section class="container">
   <h1>Animes</h1>
   <div class="d-flex justify-content-end">
-    <span>Ordenar por:</span>
-    <ul>
-      <li><a href="/animes/list/?order=score">A - Z</a></li>
+    <ul class="list-unstyled d-flex raw">
+      <span>Ordernar por: </span>
+      <li> <a href="/animes/list/order=end"> Mayor a menor </a></li>
+      <li>-<a href="/animes/list/order=score"> Mayor score </a></li>
+      <li>-<a href="/animes/list/order=episodes"> Más episodios </a></li>
     </ul>
   </div>
   <hr />
@@ -13,18 +15,20 @@
     {{#each animes}}
       <div class="col-md-2">
         <article class="character">
-          <h2>{{name}} <small>#{{mal_id}}</small></h2>
+          <h2><small>#{{mal_id}}</small></h2>
           <hr />
           <a href="/animes/{{_id}}"><img
               src="{{images.jpg.image_url}}"
               alt=""
             /></a>
-          <p><strong>Title:</strong> {{title}}</p>
+          <p><strong>{{title}}</strong> </p>
           <p>Episodes: {{episodes}}</p>
           <p>Status: {{status}}</p>
           {{!-- <iframe src="{{trailer.embed_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="video" style="width: 50%; height: 450px;"></iframe>  --}}
           {{! <div class="btn-group" style="width: 100%"> }}
+
         </article>
+
       </div>
     {{/each}}
 
@@ -34,10 +38,10 @@
       <ul class="list-unstyled d-flex raw">
         <span>Página: </span>
         <li><a href="/animes/list/"> 1 </a></li>
-        <li><a href="/animes/list/2"> 2 </a></li>
-        <li><a href="/animes/list/3"> 3 </a></li>
-        <li><a href="/animes/list/4"> 4 </a></li>
-        <li><a href="/animes/list/5"> 5 </a></li>
+        <li>-<a href="/animes/list/2"> 2 </a></li>
+        <li>-<a href="/animes/list/3"> 3 </a></li>
+        <li>-<a href="/animes/list/4"> 4 </a></li>
+        <li>-<a href="/animes/list/5"> 5 </a></li>
       </ul>
     </div>
 

@@ -7,6 +7,37 @@ const User = require("../models/User.model");
 const ApiAnime = require("../services/anime.service");
 const apiAnime = new ApiAnime();
 
+//ORDENACIONES
+router.get("/list/order=end", (req, res) => {
+  Anime.find()
+    .sort({ mal_id: -1 })
+    .limit(12)
+    .then((animes) => {
+      res.render("pages/animes-list", { animes });
+    })
+    .catch((err) => console.log(err));
+});
+
+router.get("/list/?order=score", (req, res) => {
+  Anime.find()
+    .sort({ score: -1 })
+    .limit(12)
+    .then((animes) => {
+      res.render("pages/animes-list", { animes });
+    })
+    .catch((err) => console.log(err));
+});
+
+router.get("/list/?order=episodes", (req, res) => {
+  Anime.find()
+    .sort({ episodes: -1 })
+    .limit(12)
+    .then((animes) => {
+      res.render("pages/animes-list", { animes });
+    })
+    .catch((err) => console.log(err));
+});
+
 //GET ANIMES
 router.get("/insertar", (req, res) => {
   apiAnime.getFullAnimebyID().then(({ data }) => {
@@ -69,15 +100,6 @@ router.get("/list/5", (req, res) => {
     })
     .catch((err) => console.log(err));
 });
-router.get("/list/?order=score", (req, res) => {
-  Anime.find()
-    .sort({ episodes: -1 })
-    .limit(12)
-    .then((animes) => {
-      res.render("pages/animes-list", { animes });
-    })
-    .catch((err) => console.log(err));
-});
 
 //GET ANIME DETAILS
 router.get("/:id", isLoggedIn, async (req, res, next) => {
@@ -116,10 +138,6 @@ router.get(
     }
   }
 );
-
-//ORDENACIONES
-
-//sort desc
 
 ////POST ANIMES
 router.post(
