@@ -4,7 +4,7 @@
       <h1>Editar character</h1>
       <hr />
 
-      <form action="/characters/{{_id}}/edit" method="POST">
+      <form action="/characters/{{character._id}}/edit" method="POST">
 
         <div class="mb-3 row">
           <div class="col">
@@ -56,12 +56,12 @@
         </div>
 
         <div class="mb-3">
-          <label for="image_url" class="form-label">URL de la imagen:</label>
+          <label for="images" class="form-label">URL de la imagen:</label>
           <input
             type="url"
             value="{{character.images.jpg.image_url}}"
             class="form-control"
-            name="image_url"
+            name="images"
           />
           <div class="form-text">Actualiza la URL a la imagen que desees.</div>
         </div>

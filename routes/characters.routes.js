@@ -76,7 +76,6 @@ router.post(
           image_url: req.body.images,
         },
       },
-      nicknames: [{ 0: req.body.nicknames }],
     };
     await Character.findByIdAndUpdate(id, data);
     res.redirect(`/characters/${id}`);
