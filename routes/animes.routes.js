@@ -17,36 +17,62 @@ router.get("/insertar", (req, res) => {
   });
 });
 
-router.get("/results", (req, res) => {
-  function getAnimeData() {
-    const animeName = document.getElementById("anime-name").value;
-    fetch(`${API_URL}/anime?q=${animeName}`)
-      .then((res) => res.json())
-      .then((data) => {
-        data.data.forEach((item) => {
-          const anime = item;
-          console.log(item);
-          const imageUrl = item.images;
-          const animeDataDiv = document.createElement("div");
-          animeDataDiv.innerHTML = `
-        <p></p>
-          <img src ="${imageUrl.jpg.image_url}">
-          <p><b>Title:</b> ${anime.title}</p>
-          <p><b>Local Name:</b> ${anime.title_japanese} <p>
-          <p><b>Synopsis:</b> ${anime.synopsis}</p>
-          <p><b>Type:</b> ${anime.type}</p>
-          <p><b>Total Episodes:</b> ${anime.episodes}</p>
-        `;
-
-          document.getElementById("anime-data").appendChild(animeDataDiv);
-        });
-      });
-  }
-});
+// router.get("/results", (req, res) => {
+//   apiAnime.getAnimeData().then(({ data }) => {
+//     res.render("pages/results", data);
+//   });
+// });
 
 //GET ANIME LIST
 router.get("/list", (req, res) => {
   Anime.find()
+    .sort({ mal_id: 1 })
+    .limit(12)
+    .then((animes) => {
+      res.render("pages/animes-list", { animes });
+    })
+    .catch((err) => console.log(err));
+});
+router.get("/list/2", (req, res) => {
+  Anime.find({ mal_id: { $gte: 30 } })
+    .sort({ mal_id: 1 })
+    .limit(12)
+    .then((animes) => {
+      res.render("pages/animes-list", { animes });
+    })
+    .catch((err) => console.log(err));
+});
+router.get("/list/3", (req, res) => {
+  Anime.find({ mal_id: { $gte: 52 } })
+    .sort({ mal_id: 1 })
+    .limit(12)
+    .then((animes) => {
+      res.render("pages/animes-list", { animes });
+    })
+    .catch((err) => console.log(err));
+});
+router.get("/list/4", (req, res) => {
+  Anime.find({ mal_id: { $gte: 64 } })
+    .sort({ mal_id: 1 })
+    .limit(12)
+    .then((animes) => {
+      res.render("pages/animes-list", { animes });
+    })
+    .catch((err) => console.log(err));
+});
+router.get("/list/5", (req, res) => {
+  Anime.find({ mal_id: { $gte: 76 } })
+    .sort({ mal_id: 1 })
+    .limit(12)
+    .then((animes) => {
+      res.render("pages/animes-list", { animes });
+    })
+    .catch((err) => console.log(err));
+});
+router.get("/list/?order=score", (req, res) => {
+  Anime.find()
+    .sort({ episodes: -1 })
+    .limit(12)
     .then((animes) => {
       res.render("pages/animes-list", { animes });
     })
@@ -90,6 +116,10 @@ router.get(
     }
   }
 );
+
+//ORDENACIONES
+
+//sort desc
 
 ////POST ANIMES
 router.post(

@@ -1,5 +1,11 @@
 <section class="container">
   <h1>Animes</h1>
+  <div class="d-flex justify-content-end">
+    <span>Ordenar por:</span>
+    <ul>
+      <li><a href="/animes/list/?order=score">A - Z</a></li>
+    </ul>
+  </div>
   <hr />
 
   <div class="row">
@@ -24,7 +30,16 @@
 
     <br />
     <br />
-    <button id="cargar-mas">Página siguiente</button>
+    <div class="d-flex justify-content-center">
+      <ul class="list-unstyled d-flex raw">
+        <span>Página: </span>
+        <li><a href="/animes/list/"> 1 </a></li>
+        <li><a href="/animes/list/2"> 2 </a></li>
+        <li><a href="/animes/list/3"> 3 </a></li>
+        <li><a href="/animes/list/4"> 4 </a></li>
+        <li><a href="/animes/list/5"> 5 </a></li>
+      </ul>
+    </div>
 
   </div>
 
