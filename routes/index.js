@@ -10,4 +10,7 @@ module.exports = (app) => {
   app.use("/users", usersRouter);
   const animessRouter = require("./animes.routes");
   app.use("/animes", animessRouter);
+
+  const charactersRouter = require("./characters.routes");
+  app.use("/characters", charactersRouter);
 };
