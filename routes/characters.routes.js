@@ -13,13 +13,6 @@ router.get("/list", (req, res) => {
     .then((characters) => {
       res.render("pages/characters-list", {
         characters,
-        canEdit:
-          (req.session.currentUser &&
-            ["ADMIN", "DEV"].includes(req.session.currentUser.role)) ||
-          req.session.currentUser._id === characters,
-        canDelete:
-          req.session.currentUser &&
-          ["ADMIN"].includes(req.session.currentUser.role),
       });
     })
     .catch((err) => console.log(err));
