@@ -48,11 +48,12 @@ router.get("/insertar", (req, res) => {
   });
 });
 
-// router.get("/results", (req, res) => {
-//   apiAnime.getAnimeData().then(({ data }) => {
-//     res.render("pages/results", data);
-//   });
-// });
+router.post("/results", (req, res) => {
+  const { data } = req.body;
+  apiAnime.getSearchAnime(data).then(({ data }) => {
+    res.render("pages/animes-list", { animes: data.data });
+  });
+});
 
 //GET ANIME LIST
 router.get("/list", (req, res) => {

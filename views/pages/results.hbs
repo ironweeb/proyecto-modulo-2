@@ -1,2 +1,14 @@
-<div id="anime-data"></div>
-hola
+{{#with data}}
+  <h1>{{title}}</h1>
+  <div class="d-flex">
+    <img src="{{images.jpg.image_url}}" alt="`trailer" of {{title}} ` />
+    {{!-- <iframe src="{{trailer.embed_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="video" style="width: 50%; height: 450px;"></iframe>  --}}
+    <h3>{{synopsis}}</h3>
+  </div>
+  <h3>Episodios:{{episodes}}</h3>
+  <h3>Género:{{genres.name}}</h3>
+  <h3>Score: {{score}}</h3>
+
+  <a href="/animes/list">VOLVER</a>
+
+{{/with}}

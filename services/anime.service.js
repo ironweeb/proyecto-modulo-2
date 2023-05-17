@@ -11,11 +11,18 @@ class ApiService {
     return this.api.get(`/anime?page=${page}`);
   }
 
-  // getSearchAnime() {
-  //   const animeName = "";
-  //   console.log(animeName);
-  //   return this.api.get(`/anime?q=${animeName}`);
+  // searchAnime() {
+  //   const animeURL = "https://api.jikan.moe/v4/anime";
+  //   const { animeName } = req.body;
+  //   const { data } = this.api.get(`${animeURL}?q=${animeName}&limit=6`);
+  //   return res.status(200).json({
+  //     success: true,
+  //     data: data.data,
+  //   });
   // }
+  getSearchAnime(animeName) {
+    return this.api.get(`/anime?q=${animeName}&limit=6`);
+  }
 }
 
 module.exports = ApiService;

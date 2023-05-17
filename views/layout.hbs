@@ -41,11 +41,17 @@
             <form action="/logout" method="POST">
               <button class="nav-link">Log out</button>
             </form>
-        <form>
-      <label for="anime-name">Enter anime name:</label><br>
-      <input autocomplete="off" type="text" placeholder="anime..." id="anime-name" name="anime-name"><br> <p></p>
-      <button type="button" onclick="getAnimeData()">Submit</button>
-    </form>
+
+            <form action="/animes/results" method="POST">
+            <input type="text" name="data" placeholder="naruto, one piece...">
+            <button type="submit">Search</button>
+            </form>
+        {{!-- <form>
+          
+      <label for="animename">Enter anime name:</label><br>
+      <input autocomplete="off" type="text" placeholder="anime..." id="anime-name" name="animename"><br> <p></p>
+      <button type="button" onclick="searchAnime()">Submit</button>
+    </form> --}}
 
       </div>
     </div>
