@@ -23,6 +23,7 @@ const userSchema = new Schema(
       enum: ["USER", "VIP", "ADMIN"],
       default: "USER",
     },
+    animes: [{ type: Schema.Types.ObjectId, ref: "Anime" }],
   },
   {
     timestamps: true,

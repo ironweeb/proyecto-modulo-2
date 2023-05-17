@@ -22,12 +22,17 @@
               alt=""
             /></a>
           <p><strong>{{title}}</strong> </p>
+          <p>Score: {{score}}</p>
           <p>Episodes: {{episodes}}</p>
           <p>Status: {{status}}</p>
           {{!-- <iframe src="{{trailer.embed_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="video" style="width: 50%; height: 450px;"></iframe>  --}}
           {{! <div class="btn-group" style="width: 100%"> }}
 
         </article>
+        <form action="/users/my-anime-list" method="POST">
+
+          <button type="submit"> Añadir a mi lista</button>
+        </form>
 
       </div>
     {{/each}}

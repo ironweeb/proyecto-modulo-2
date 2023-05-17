@@ -48,13 +48,6 @@ router.get("/insertar", (req, res) => {
   });
 });
 
-router.post("/results", (req, res) => {
-  const { data } = req.body;
-  apiAnime.getSearchAnime(data).then(({ data }) => {
-    res.render("pages/animes-list", { animes: data.data });
-  });
-});
-
 //GET ANIME LIST
 router.get("/list", (req, res) => {
   Anime.find()
@@ -160,6 +153,12 @@ router.post(
   }
 );
 
+router.post("/results", (req, res) => {
+  const { data } = req.body;
+  apiAnime.getSearchAnime(data).then(({ data }) => {
+    res.render("pages/animes-list", { animes: data.data });
+  });
+});
 router.post(
   "/:id/delete",
   [isLoggedIn, checkRole(["ADMIN"])],

@@ -2,10 +2,22 @@ const express = require("express");
 const router = express.Router();
 const { isLoggedIn, checkRole } = require("../middleware/route.guard");
 const User = require("../models/User.model");
+const Anime = require("../models/Anime.model");
+
+//GET ROUTES
 
 router.get("/", async (req, res, next) => {
   const users = await User.find();
   res.render("users/users", { users });
+});
+
+//GET MY ANIME LIST
+router.get("/my-anime-list", async (req, res) => {
+  const animes = await User.findById(req.session.currentUser._id).populate({
+    path: "animes",
+    model: Anime,
+  });
+  res.render("users/myanime");
 });
 
 router.get("/:id", isLoggedIn, async (req, res, next) => {
@@ -36,6 +48,9 @@ router.get(
   }
 );
 
+/////POST ROUTES/////
+
+//POST EDIT USER
 router.post("/:id/edit", checkRole(["ADMIN"]), async (req, res, next) => {
   const { id } = req.params;
   await User.findByIdAndUpdate(id, req.body);
@@ -43,6 +58,7 @@ router.post("/:id/edit", checkRole(["ADMIN"]), async (req, res, next) => {
   res.redirect(`/users/${id}`);
 });
 
+//POST DELETE USER
 router.post(
   "/:id/delete",
   [isLoggedIn, checkRole(["ADMIN"])],
@@ -53,4 +69,11 @@ router.post(
   }
 );
 
+//POST CREATE MY ANIME LIST
+router.post("/my-anime-list", async (req, res) => {
+  const { body } = req;
+  const { anime: animeId } = req.body;
+  const anime = await Anime.create(body);
+  await Anime.findByIdAndUpdate(animeId, { $push: { animes } });
+});
 module.exports = router;
