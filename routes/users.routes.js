@@ -17,7 +17,8 @@ router.get("/my-anime-list", async (req, res) => {
     path: "animes",
     model: Anime,
   });
-  res.render("users/myanime");
+
+  res.render("users/myanime", { animes });
 });
 
 router.get("/:id", isLoggedIn, async (req, res, next) => {
@@ -49,6 +50,15 @@ router.get(
 );
 
 /////POST ROUTES/////
+//POST CREATE MY ANIME LIST
+router.post("/my-anime-list/:id", async (req, res) => {
+  const { id } = req.params;
+  await User.findByIdAndUpdate(req.session.currentUser._id, {
+    $push: { animes: id },
+  });
+  console.log(id);
+  res.redirect("/users/my-anime-list");
+});
 
 //POST EDIT USER
 router.post("/:id/edit", checkRole(["ADMIN"]), async (req, res, next) => {
@@ -69,11 +79,4 @@ router.post(
   }
 );
 
-//POST CREATE MY ANIME LIST
-router.post("/my-anime-list", async (req, res) => {
-  const { body } = req;
-  const { anime: animeId } = req.body;
-  const anime = await Anime.create(body);
-  await Anime.findByIdAndUpdate(animeId, { $push: { animes } });
-});
 module.exports = router;
