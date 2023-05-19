@@ -1,14 +1,28 @@
-{{#with animes}}
-  <h1>{{title}}</h1>
-  <div class="d-flex">
-    <img src="{{images.jpg.image_url}}" alt="`trailer" of {{title}} ` />
-    {{!-- <iframe src="{{trailer.embed_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="video" style="width: 50%; height: 450px;"></iframe>  --}}
-    <h3>{{synopsis}}</h3>
-  </div>
-  <h3>Episodios:{{episodes}}</h3>
-  <h3>Género:{{genres.name}}</h3>
-  <h3>Score: {{score}}</h3>
+<div class="row">
 
-  <a href="/animes/list">VOLVER</a>
+    {{#each animes}}
+      <div class="col-md-2">
+        <article class="character">
+          <h2><small>#{{mal_id}}</small></h2>
+          <hr />
+          <a href="/animes/{{_id}}"><img
+              src="{{images.jpg.image_url}}"
+              alt=""
+            /></a>
+          <p><strong>{{title}}</strong> </p>
+          <p>Score: {{score}}</p>
+          <p>Episodes: {{episodes}}</p>
+          <p>Status: {{status}}</p>
+          {{!-- <iframe src="{{trailer.embed_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="video" style="width: 50%; height: 450px;"></iframe>  --}}
+          {{! <div class="btn-group" style="width: 100%"> }}
 
-{{/with}}
+        </article>
+        <form action="/users/my-anime-list/{{_id}}" method="POST">
+
+          <button type="submit"> Añadir a mi lista</button>
+        </form>
+
+      </div>
+    {{/each}}
+
+</section>
