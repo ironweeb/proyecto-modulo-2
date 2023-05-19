@@ -18,7 +18,7 @@ router.get("/list/order=end", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.get("/list/?order=score", (req, res) => {
+router.get("/list/order=score", (req, res) => {
   Anime.find()
     .sort({ score: -1 })
     .limit(12)
@@ -28,7 +28,7 @@ router.get("/list/?order=score", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-router.get("/list/?order=episodes", (req, res) => {
+router.get("/list/order=episodes", (req, res) => {
   Anime.find()
     .sort({ episodes: -1 })
     .limit(12)
@@ -140,27 +140,37 @@ router.post("/results", (req, res) => {
         (element) => !existingMalIds.includes(element.mal_id)
       );
       if (newAnimeList.length > 0) {
+        //crea nuevos animes
         Anime.bulkWrite(
           newAnimeList.map((element) => ({
-            insertOne: {
-              document: element,
+            updateOne: {
+              //busca por mal_id
+              filter: { mal_id: element.mal_id },
+              update: { $set: element },
+              //permite crear nuevos animes si no existen
+              upsert: true,
             },
           }))
         )
           .then(() => {
             console.log("Nuevos animes creados:", newAnimeList);
-            res.render("pages/results", { animes: data.data });
+            Anime.find({ mal_id: { $in: malIds } }).then((createdAnimeList) => {
+              res.render("pages/results", { animes: createdAnimeList });
+            });
           })
           .catch((err) => {
             console.error("Error al crear nuevos animes:", err);
             res.render("pages/results", { animes: data.data });
           });
       } else {
-        res.render("pages/results", { animes: data.data });
+        Anime.find({ mal_id: { $in: malIds } }).then((createdAnimeList) => {
+          res.render("pages/results", { animes: createdAnimeList });
+        });
       }
     });
   });
 });
+
 router.post(
   "/:id/delete",
   [isLoggedIn, checkRole(["ADMIN"])],
