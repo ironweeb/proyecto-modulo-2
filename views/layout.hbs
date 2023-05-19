@@ -32,14 +32,15 @@
           <li class="nav-item">
             <a class="nav-link" href="/registro">Register</a>
           </li>
-          {{#if currentUser}}
-                  {{#with currentUser}}
-                  <li><img class="rounded-circle nav-item" style="width:60px" src="{{this.profileImg}}" ></li>
-                  <li><a class="text-light" href="/logout">Log out</a></li>      
-                  {{/with}}
-               {{else}}
-                  <li><a class="text-light nav-item text-aling-center" href="/login">Log in</a></li>
-               {{/if}}
+{{#if userInSession}}
+  {{#with currentUser}}
+    <li><img class="rounded-circle nav-item" style="width:60px" src="{{this.profileImg}}" ></li>
+    <li><a class="text-light" href="/logout">Log out</a></li>      
+  {{/with}}
+{{else}}
+  <li><a class="text-light nav-item text-aling-center" href="/login">Log in</a></li>
+{{/if}}
+              
           <li class="nav-item">
              <li class="nav-item">
           </li>
@@ -50,12 +51,6 @@
             <button type="submit" class="btn btn-outline-light">Search</button>
             </div>
             </form>
-        {{!-- <form>
-          
-      <label for="animename">Enter anime name:</label><br>
-      <input autocomplete="off" type="text" placeholder="anime..." id="anime-name" name="animename"><br> <p></p>
-      <button type="button" onclick="searchAnime()">Submit</button>
-    </form> --}}
 
       </div>
     </div>
