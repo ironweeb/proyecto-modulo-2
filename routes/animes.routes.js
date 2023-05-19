@@ -49,52 +49,28 @@ router.get("/insertar", (req, res) => {
 });
 
 //GET ANIME LIST
-router.get("/list", (req, res) => {
+router.get("/list/:page", (req, res) => {
+  const page = req.params.page || 1;
+  const limit = 12;
+  const skip = (page - 1) * limit;
+
   Anime.find()
     .sort({ mal_id: 1 })
-    .limit(12)
+    .skip(skip)
+    .limit(limit)
     .then((animes) => {
-      res.render("pages/animes-list", { animes });
+      res.render("pages/animes-list", {
+        animes,
+        prevPage: page - 1,
+        nextPage: page + 1,
+        hasPrevPage: page > 1,
+        hasNextPage: animes.length === limit,
+        currentPage: page,
+        firstPage: 1,
+      });
     })
     .catch((err) => console.log(err));
 });
-router.get("/list/2", (req, res) => {
-  Anime.find({ mal_id: { $gte: 30 } })
-    .sort({ mal_id: 1 })
-    .limit(12)
-    .then((animes) => {
-      res.render("pages/animes-list", { animes });
-    })
-    .catch((err) => console.log(err));
-});
-router.get("/list/3", (req, res) => {
-  Anime.find({ mal_id: { $gte: 52 } })
-    .sort({ mal_id: 1 })
-    .limit(12)
-    .then((animes) => {
-      res.render("pages/animes-list", { animes });
-    })
-    .catch((err) => console.log(err));
-});
-router.get("/list/4", (req, res) => {
-  Anime.find({ mal_id: { $gte: 64 } })
-    .sort({ mal_id: 1 })
-    .limit(12)
-    .then((animes) => {
-      res.render("pages/animes-list", { animes });
-    })
-    .catch((err) => console.log(err));
-});
-router.get("/list/5", (req, res) => {
-  Anime.find({ mal_id: { $gte: 76 } })
-    .sort({ mal_id: 1 })
-    .limit(12)
-    .then((animes) => {
-      res.render("pages/animes-list", { animes });
-    })
-    .catch((err) => console.log(err));
-});
-
 //GET ANIME DETAILS
 router.get("/:id", isLoggedIn, async (req, res, next) => {
   try {
@@ -153,10 +129,36 @@ router.post(
   }
 );
 
+//POST ANIME SEARCH AND CREATE
 router.post("/results", (req, res) => {
   const { data } = req.body;
   apiAnime.getSearchAnime(data).then(({ data }) => {
-    res.render("pages/animes-list", { animes: data.data });
+    const malIds = data.data.map((element) => element.mal_id);
+    Anime.find({ mal_id: { $in: malIds } }).then((existingAnimeList) => {
+      const existingMalIds = existingAnimeList.map((anime) => anime.mal_id);
+      const newAnimeList = data.data.filter(
+        (element) => !existingMalIds.includes(element.mal_id)
+      );
+      if (newAnimeList.length > 0) {
+        Anime.bulkWrite(
+          newAnimeList.map((element) => ({
+            insertOne: {
+              document: element,
+            },
+          }))
+        )
+          .then(() => {
+            console.log("Nuevos animes creados:", newAnimeList);
+            res.render("pages/results", { animes: data.data });
+          })
+          .catch((err) => {
+            console.error("Error al crear nuevos animes:", err);
+            res.render("pages/results", { animes: data.data });
+          });
+      } else {
+        res.render("pages/results", { animes: data.data });
+      }
+    });
   });
 });
 router.post(

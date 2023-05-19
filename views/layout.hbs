@@ -24,7 +24,7 @@
             <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/animes/list">Animes</a>
+            <a class="nav-link" href="/animes/list/{{firstPage}}">Animes</a>
           </li>
           <li>
             <a class="nav-link" href="/characters/list">Characters</a>
@@ -32,19 +32,23 @@
           <li class="nav-item">
             <a class="nav-link" href="/registro">Register</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Log in</a>
-          </li>
+          {{#if currentUser}}
+                  {{#with currentUser}}
+                  <li><img class="rounded-circle nav-item" style="width:60px" src="{{this.profileImg}}" ></li>
+                  <li><a class="text-light" href="/logout">Log out</a></li>      
+                  {{/with}}
+               {{else}}
+                  <li><a class="text-light nav-item text-aling-center" href="/login">Log in</a></li>
+               {{/if}}
           <li class="nav-item">
              <li class="nav-item">
           </li>
-            <form action="/logout" method="POST">
-              <button class="nav-link">Log out</button>
-            </form>
 
             <form action="/animes/results" method="POST">
-            <input type="text" name="data" placeholder="naruto, one piece...">
-            <button type="submit">Search</button>
+            <div class="input-group">
+            <input type="text" class="form-control" name="data" placeholder="naruto, one piece...">
+            <button type="submit" class="btn btn-outline-light">Search</button>
+            </div>
             </form>
         {{!-- <form>
           
