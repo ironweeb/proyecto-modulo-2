@@ -1,25 +1,25 @@
 <section class="container">
   <h1>Animes</h1>
-  <div class="d-flex justify-content-end">
-  <div class="row">
 
-    {{#each animes}}
+<div class="d-flex wrap">
+
+    {{#each animes.animes}}
       <div class="col-md-2">
         <article class="character">
-          <h2><small>#{{animes.mal_id}}</small></h2>
+          <h2><small>#{{mal_id}}</small></h2>
           <hr />
           <a href="/animes/{{_id}}"><img
-              src="{{animes.images.jpg.image_url}}"
+              src="{{images.jpg.image_url}}"
               alt=""
             /></a>
           <p><strong>{{title}}</strong> </p>
           <p>Score: {{score}}</p>
           <p>Episodes: {{episodes}}</p>
           <p>Status: {{status}}</p>
-          {{!-- <iframe src="{{trailer.embed_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="video" style="width: 50%; height: 450px;"></iframe>  --}}
-          {{! <div class="btn-group" style="width: 100%"> }}
+          
+          
 
         </article>
+</div>
 
-      </div>
     {{/each}}

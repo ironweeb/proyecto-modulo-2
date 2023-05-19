@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
 });
 
 //GET MY ANIME LIST
-router.get("/my-anime-list", async (req, res) => {
+router.get("/my-anime-list", isLoggedIn, async (req, res) => {
   const animes = await User.findById(req.session.currentUser._id).populate({
     path: "animes",
     model: Anime,
