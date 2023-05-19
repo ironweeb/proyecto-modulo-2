@@ -50,7 +50,7 @@ router.get("/insertar", (req, res) => {
 
 //GET ANIME LIST
 router.get("/list/:page", (req, res) => {
-  const page = req.params.page || 1;
+  const page = parseInt(req.params.page) || 1;
   const limit = 12;
   const skip = (page - 1) * limit;
 
@@ -59,6 +59,7 @@ router.get("/list/:page", (req, res) => {
     .skip(skip)
     .limit(limit)
     .then((animes) => {
+      console.log("THIS IS MY PAGE", req.params.page);
       res.render("pages/animes-list", {
         animes,
         prevPage: page - 1,

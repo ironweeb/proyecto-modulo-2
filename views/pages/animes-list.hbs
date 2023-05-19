@@ -35,17 +35,15 @@
     <br />
     <div class="pagination justify-content-center">
       {{#if hasPrevPage}}
-        <a href="/list/{{prevPage}}">Anterior</a>
+        <a href="/animes/list/1">Página anterior</a>
       {{/if}}
-      {{#each pages}}
-        {{#if isCurrentPage}}
-          <span class="current-page">{{this}}</span>
-        {{else}}
-          <a href="/list/{{this}}">{{this}}</a>
-        {{/if}}
-      {{/each}}
+
+      {{! Enlace a la página actual }}
+      <span>Página {{currentPage}} </span>
+
+      {{! Enlace a la página siguiente }}
       {{#if hasNextPage}}
-        <a href="/list/{{nextPage}}">Siguiente</a>
+        <a href="/animes/list/{{nextPage}}">Página siguiente</a>
       {{/if}}
     </div>
   </div>
