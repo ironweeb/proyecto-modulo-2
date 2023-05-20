@@ -3,9 +3,9 @@
   <div class="d-flex justify-content-end">
     <ul class="list-unstyled d-flex raw">
       <span>Ordenar por: </span>
-      <li> <a href="/animes/list/order=end">Mayor a menor</a></li>
-      <li>-<a href="/animes/list/order=score">Mayor score</a></li>
-      <li>-<a href="/animes/list/order=episodes">Más episodios</a></li>
+      <li><a href="/animes/list/order=end" class="button-link">Mayor a menor</a></li>
+      <li>-<a href="/animes/list/order=score" class="button-link">Mayor score</a></li>
+      <li>-<a href="/animes/list/order=episodes" class="button-link">Más episodios</a></li>
     </ul>
   </div>
   <hr />
@@ -16,17 +16,17 @@
         <article class="character">
           <h2><small>#{{mal_id}}</small></h2>
           <hr />
-          <a href="/animes/{{_id}}"><img
-              src="{{images.jpg.image_url}}"
-              alt=""
-            /></a>
+          <a href="/animes/{{_id}}" class="anime-link">
+            <img src="{{images.jpg.image_url}}" alt="" width="225" height="310" />
+          </a>
+
           <p><strong>{{title}}</strong></p>
           <p>Score: {{score}}</p>
           <p>Episodes: {{episodes}}</p>
           <p>Status: {{status}}</p>
         </article>
         <form action="/users/my-anime-list/{{_id}}" method="POST">
-          <button type="submit">Añadir a mi lista</button>
+          <button type="submit" class="add-list-button">Añadir a mi lista</button>
         </form>
       </div>
     {{/each}}
@@ -35,15 +35,13 @@
     <br />
     <div class="pagination justify-content-center">
       {{#if hasPrevPage}}
-        <a href="/animes/list/1">Página anterior</a>
+        <a href="/animes/list/1" class="pagination-link">Página anterior</a>
       {{/if}}
 
-      {{! Enlace a la página actual }}
-      <span>Página {{currentPage}} </span>
+      <span class="current-page">Página {{currentPage}}</span>
 
-      {{! Enlace a la página siguiente }}
       {{#if hasNextPage}}
-        <a href="/animes/list/{{nextPage}}">Página siguiente</a>
+        <a href="/animes/list/{{nextPage}}" class="pagination-link">Página siguiente</a>
       {{/if}}
     </div>
   </div>

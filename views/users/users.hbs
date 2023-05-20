@@ -1,14 +1,13 @@
-<h1> List of Users </h1>
+<h1 class="user-list-title">List of Users</h1>
 
 {{#each users}}
-
-  <p>Nombre de usuario: {{username}}</p>
-  <p>Email: {{email}}</p>
-  <p>Imagen de perfil:</p>
-  <img src="{{profileImg}}" alt="Imagen de perfil" />
-  <p>Descripción: {{description}}</p>
-
-  <a href="/users/{{_id}}">Ver perfil</a>
-  <hr />
-
+  <div class="user-item">
+    <p class="username">Nombre de usuario: {{username}}</p>
+    <p class="email">Email: {{email}}</p>
+    <p class="profile-img-label"></p>
+    <img class="profile-img" src="{{profileImg}}" alt="Imagen de perfil" />
+    <p class="description">Descripción: {{description}}</p>
+    <a class="view-profile-link" href="/users/{{_id}}">Ver perfil</a>
+    <hr class="divider" />
+  </div>
 {{/each}}

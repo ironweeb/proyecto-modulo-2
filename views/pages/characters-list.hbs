@@ -1,39 +1,35 @@
 <section class="container">
-  <h1>character</h1>
+  <h1>Character</h1>
   <hr />
 
   <div class="row">
-
     {{#each characters}}
       <div class="col-md-2">
         <article class="character">
           <hr />
-          <a href="/characters/{{_id}}"><img
-              src="{{images.jpg.image_url}}"
-              alt=""
-            /></a>
+          <a href="/characters/{{_id}}" class="character-link">
+            <img src="{{images.jpg.image_url}}" alt="" />
+          </a>
           <h2>{{name}} <small>#{{mal_id}}</small></h2>
           <p>Name Kanji: {{name_kanji}}</p>
-          <p>Favorites:: {{favorites}}❤️</p>
+          <p>Favorites: {{favorites}} ❤️</p>
         </article>
         <div class="d-flex">
-        {{#if ../canEdit}}
-    <a href="/characters/{{_id}}/edit" class="btn btn-outline-dark btn-sm">Editar anime ✏️</a>
-{{/if}}
+          {{#if ../canEdit}}
+            <a href="/characters/{{_id}}/edit" class="btn btn-outline-dark btn-sm">Editar anime ✏️</a>
+          {{/if}}
 
-{{#if ../canDelete}}
-<form action="/characters/{{_id}}/delete" method="post">
-<button type="summit">🗑️</button>
-</form>
-{{/if}}
-</div>
+          {{#if ../canDelete}}
+            <form action="/characters/{{_id}}/delete" method="post">
+              <button type="submit" class="delete-button">🗑️</button>
+            </form>
+          {{/if}}
+        </div>
       </div>
     {{/each}}
 
     <br />
     <br />
-    <button id="cargar-mas">Página siguiente</button>
-
+    <button id="cargar-mas" class="pagination-button">Página siguiente</button>
   </div>
-
 </section>

@@ -1,25 +1,22 @@
-<section class="container">
-  <h1>Animes</h1>
-
+<h1>Animes</h1>
 <div class="d-flex wrap">
-
-    {{#each animes.animes}}
-      <div class="col-md-2">
-        <article class="character">
-          <h2><small>#{{mal_id}}</small></h2>
-          <hr />
-          <a href="/animes/{{_id}}"><img
-              src="{{images.jpg.image_url}}"
-              alt=""
-            /></a>
-          <p><strong>{{title}}</strong> </p>
-          <p>Score: {{score}}</p>
-          <p>Episodes: {{episodes}}</p>
-          <p>Status: {{status}}</p>
-          
-          
-
-        </article>
+  {{#each animes.animes}}
+  <div class="col-md-2">
+    <article class="character">
+      <h2><small>#{{mal_id}}</small></h2>
+      <hr />
+      <a href="/animes/{{_id}}">
+        <div class="anime-card">
+          <img class="anime-image" src="{{images.jpg.image_url}}" alt="" />
+          <div class="anime-details">
+            <p><strong>{{title}}</strong></p>
+            <p>Score: {{score}}</p>
+            <p>Episodes: {{episodes}}</p>
+            <p>Status: {{status}}</p>
+          </div>
+        </div>
+      </a>
+    </article>
+  </div>
+  {{/each}}
 </div>
-
-    {{/each}}
