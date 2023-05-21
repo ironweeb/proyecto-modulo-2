@@ -1,6 +1,7 @@
 body {
   font-weight: 200;
   font-family: sans-serif;
+  background-color: darkgray;
 }
 
 h1,
@@ -168,4 +169,30 @@ h3 {
   text-decoration: none;
   border-radius: 4px;
   transition: background-color 0.3s ease;
+}
+
+.custom-img {
+  width: 40%;
+  max-width: 100%;
+  height: auto;
+}
+
+.custom-text {
+  max-height: 400px; /* Ajusta la altura máxima del texto según tus necesidades */
+  overflow-y: auto;
+}
+
+.custom-button {
+  display: flex;
+  align-items: center;
+}
+
+.custom-button a,
+.custom-button button {
+  margin-right: 10px;
+}
+
+.delete-button {
+  background-color: red;
+  color: white;
 }

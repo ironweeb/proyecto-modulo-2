@@ -17,8 +17,16 @@
       integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
       crossorigin="anonymous"
     />
+    <style>
+      .bg-image { background-repeat: no-repeat; background-size: cover;
+      background-position: center center; }
+    </style>
   </head>
-  <body>
+  <br />
+  <body
+    class="bg-image"
+    style="background-image: url(/images/1920x1080-CIELO-AZUL-Y-NUBES-FONDO-DE-PANTALLA-HD.jpg);"
+  >
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
@@ -50,23 +58,28 @@
             </li>
             {{#if userInSession}}
               {{#with currentUser}}
-                <li><img
-                    class="rounded-circle nav-item"
-                    style="width:60px"
+                <li class="nav-item">
+                  <img
+                    class="rounded-circle"
+                    style="width: 60px;"
                     src="{{this.profileImg}}"
-                  /></li>
-                <li><a class="text-light" href="/logout">Log out</a></li>
+                  />
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="/logout">Log out</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-light" href="/users/my-anime-list">My
+                    anime</a>
+                </li>
+
               {{/with}}
             {{else}}
-              <li><a
-                  class="text-light nav-item text-aling-center"
-                  href="/login"
-                >Log in</a></li>
+              <li class="nav-item">
+                <a class="nav-link text-light" href="/login">Log in</a>
+              </li>
             {{/if}}
-            <li class="nav-item">
-              <li class="nav-item"></li>
-            </li>
-            <form action="/animes/results" method="POST">
+            <form action="/animes/results" method="POST" class="d-flex">
               <div class="input-group">
                 <input
                   type="text"

@@ -178,7 +178,7 @@ router.post(
   async (req, res, next) => {
     const { id } = req.params;
     await Anime.findByIdAndDelete(id);
-    res.redirect("/animes/list");
+    res.redirect("/animes/list/1");
   }
 );
 
