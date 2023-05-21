@@ -1,29 +1,26 @@
-<div class="row">
-
-    {{#each animes}}
-      <div class="col-md-2">
-        <article class="character">
-          <h2><small>#{{mal_id}}</small></h2>
-          <hr />
-          <a href="/animes/{{_id}}"><img
-              src="{{images.jpg.image_url}}"
-              alt=""
-            /></a>
-          <p><strong>{{title}}</strong> </p>
-          <p>Score: {{score}}</p>
-          <p>Episodes: {{episodes}}</p>
-          <p>Status: {{status}}</p>
-          {{!-- <iframe src="{{trailer.embed_url}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen="" title="video" style="width: 50%; height: 450px;"></iframe>  --}}
-          {{! <div class="btn-group" style="width: 100%"> }}
-
-        </article>
-        <form action="/users/my-anime-list/{{_id}}" method="POST">
-
-          <button type="submit"> Añadir a mi lista</button>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+  {{#each animes}}
+    <div class="col">
+      <article class="character card">
+        <h2 class="card-title"><small>#{{mal_id}}</small></h2>
+        <hr />
+        <a href="/animes/{{_id}}">
+          <img src="{{images.jpg.image_url}}" class="card-img-top" alt="" />
+        </a>
+        <div class="card-body">
+          <h5 class="card-title"><strong>{{title}}</strong></h5>
+          <p class="card-text">Score: {{score}}</p>
+          <p class="card-text">Episodes: {{episodes}}</p>
+          <p class="card-text">Status: {{status}}</p>
+        </div>
+        <form
+          action="/users/my-anime-list/{{_id}}"
+          method="POST"
+          class="card-footer"
+        >
+          <button type="submit" class="btn btn-primary">Añadir a mi lista</button>
         </form>
-
-      </div>
-    {{/each}}
-
-
-</section>
+      </article>
+    </div>
+  {{/each}}
+</div>

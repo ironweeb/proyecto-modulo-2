@@ -5,44 +5,54 @@
       <span>Ordenar por: </span>
       <li><a href="/animes/list/order=end" class="button-link">Mayor a menor</a></li>
       <li>-<a href="/animes/list/order=score" class="button-link">Mayor score</a></li>
-      <li>-<a href="/animes/list/order=episodes" class="button-link">Más episodios</a></li>
+      <li>-<a href="/animes/list/order=episodes" class="button-link">Más
+          episodios</a></li>
     </ul>
   </div>
   <hr />
 
   <div class="row">
     {{#each animes}}
-      <div class="col-md-2">
-        <article class="character">
-          <h2><small>#{{mal_id}}</small></h2>
+      <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+        <article class="character card">
+          <h2 class="card-title"><small>#{{mal_id}}</small></h2>
           <hr />
-          <a href="/animes/{{_id}}" class="anime-link">
-            <img src="{{images.jpg.image_url}}" alt="" width="225" height="310" />
+          <a href="/animes/{{_id}}">
+            <img src="{{images.jpg.image_url}}" class="card-img-top" alt="" />
           </a>
-
-          <p><strong>{{title}}</strong></p>
-          <p>Score: {{score}}</p>
-          <p>Episodes: {{episodes}}</p>
-          <p>Status: {{status}}</p>
+          <div class="card-body">
+            <h5 class="card-title"><strong>{{title}}</strong></h5>
+            <p class="card-text">Score: {{score}}</p>
+            <p class="card-text">Episodes: {{episodes}}</p>
+            <p class="card-text">Status: {{status}}</p>
+          </div>
+          <form
+            action="/users/my-anime-list/{{_id}}"
+            method="POST"
+            class="card-footer"
+          >
+            <button type="submit" class="btn btn-primary">Añadir a mi lista</button>
+          </form>
         </article>
-        <form action="/users/my-anime-list/{{_id}}" method="POST">
-          <button type="submit" class="add-list-button">Añadir a mi lista</button>
-        </form>
       </div>
     {{/each}}
+  </div>
 
-    <br />
-    <br />
-    <div class="pagination justify-content-center">
-      {{#if hasPrevPage}}
-        <a href="/animes/list/1" class="pagination-link">Página anterior</a>
-      {{/if}}
+  <br />
+  <br />
+  <div class="pagination justify-content-center">
+    {{#if hasPrevPage}}
+      <a href="/animes/list/1" class="btn btn-primary pagination-link">Página
+        anterior</a>
+    {{/if}}
 
-      <span class="current-page">Página {{currentPage}}</span>
+    <span class="current-page">Página {{currentPage}}</span>
 
-      {{#if hasNextPage}}
-        <a href="/animes/list/{{nextPage}}" class="pagination-link">Página siguiente</a>
-      {{/if}}
-    </div>
+    {{#if hasNextPage}}
+      <a
+        href="/animes/list/{{nextPage}}"
+        class="btn btn-primary pagination-link"
+      >Página siguiente</a>
+    {{/if}}
   </div>
 </section>

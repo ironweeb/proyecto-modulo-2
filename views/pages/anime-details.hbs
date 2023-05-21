@@ -1,21 +1,23 @@
 {{#with anime}}
-  <h1>{{title}}</h1>
-  <div class="d-flex wrap">
-    <img src="{{images.jpg.image_url}}" alt="Trailer of {{title}}">
-    <h3>{{synopsis}}</h3>
-  </div>
-  <h3>Episodios: {{episodes}}</h3>
-  <h3>Género: {{genres.0.name}}</h3>
-  <h3>Score: {{score}}</h3>
-
-  {{#if ../canEdit}}
-    <a href="/animes/{{_id}}/edit" class="btn btn-outline-dark btn-sm">Editar anime ✏️</a>
-  {{/if}}
-
-  {{#if ../canDelete}}
-    <form action="/animes/{{_id}}/delete" method="post">
-      <button type="submit" class="delete-button">🗑️</button>
-    </form>
-  {{/if}}
-  <a href="/animes/list/1" class="back-link">VOLVER</a>
+  <section class="container">
+    <h1>{{title}}</h1>
+    <div class="d-flex wrap">
+      <img src="{{images.jpg.image_url}}" alt="Trailer of {{title}}" class="custom-img">
+      <div class="custom-text">
+        <h3>{{synopsis}}</h3>
+        <h3>Episodios: {{episodes}}</h3>
+        <h3>Género: {{genres.0.name}}</h3>
+        <h3>Score: {{score}}</h3>
+      </div>
+    </div>
+    {{#if ../canEdit}}
+      <a href="/animes/{{_id}}/edit" class="btn btn-outline-dark btn-sm custom-button">Editar anime ✏️</a>
+    {{/if}}
+    {{#if ../canDelete}}
+      <form action="/animes/{{_id}}/delete" method="post" class="custom-button">
+        <button type="submit" class="delete-button">🗑️</button>
+      </form>
+    {{/if}}
+    <a href="/animes/list/1" class="back-link">VOLVER</a>
+  </section>
 {{/with}}
