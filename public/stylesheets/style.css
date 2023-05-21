@@ -196,3 +196,8 @@ h3 {
   background-color: red;
   color: white;
 }
+
+.scrollable-text {
+  max-height: 200px; /* Ajusta el valor según tus necesidades */
+  overflow-y: scroll;
+}

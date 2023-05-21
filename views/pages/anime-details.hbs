@@ -10,6 +10,14 @@
         <h3>Score: {{score}}</h3>
       </div>
     </div>
+               <form
+            action="/users/my-anime-list/{{_id}}"
+            method="POST"
+            class="card-footer"
+          >
+            <button type="submit" class="btn btn-primary">Añadir a mi lista</button>
+          </form>
+        </article>
     {{#if ../canEdit}}
       <a href="/animes/{{_id}}/edit" class="btn btn-outline-dark btn-sm custom-button">Editar anime ✏️</a>
     {{/if}}

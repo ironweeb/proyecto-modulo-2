@@ -49,7 +49,7 @@ router.get("/insertar", (req, res) => {
 });
 
 //GET ANIME LIST
-router.get("/list/:page", (req, res) => {
+router.get("/list/:page", isLoggedIn, (req, res) => {
   const page = parseInt(req.params.page) || 1;
   const limit = 12;
   const skip = (page - 1) * limit;

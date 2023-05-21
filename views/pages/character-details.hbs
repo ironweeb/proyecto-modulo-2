@@ -1,8 +1,10 @@
 {{#with character}}
   <h1>{{name}}</h1>
   <div class="d-flex">
-    <img src="{{images.jpg.image_url}}" alt="Picture of {{name}}">
-    <h3>{{about}}</h3>
+    <img src="{{images.jpg.image_url}}" alt="Picture of {{name}}" class="img-fluid">
+    <div class="scrollable-text">
+      <h3>{{about}}</h3>
+    </div>
   </div>
   <h3>Favorites: {{favorites}}</h3>
 
@@ -16,3 +18,4 @@
     </form>
   {{/if}}
 {{/with}}
+
