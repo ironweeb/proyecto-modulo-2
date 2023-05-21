@@ -1,9 +1,6 @@
 <div class="container">
-
   <div class="row justify-content-center">
-
     <div class="col-md-6">
-
       <h1>Inicio de sesión</h1>
       <hr />
 
@@ -29,17 +26,16 @@
         </div>
 
         <div class="d-grid gap-2">
-          <button type="submit" class="btn btn-dark block">Acceder</button>
+          <button type="submit" class="btn btn-dark">Acceder</button>
         </div>
 
         {{#if errorMessage}}
           <div id="errorMessage">
             <p>{{errorMessage}}</p>
+            <p><a href="/registro" class="text-dark">Crear cuenta nueva</a></p>
           </div>
         {{/if}}
-
       </form>
     </div>
   </div>
-
 </div>
